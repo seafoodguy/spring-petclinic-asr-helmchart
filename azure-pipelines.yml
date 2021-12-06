@@ -23,6 +23,7 @@ steps:
     azureSubscription: 'iconinfo o365'
     azureResourceGroup: 'AL-AKS'
     kubernetesCluster: 'alfredk8s'
+    useClusterAdmin: true
     namespace: 'testns'
     command: 'install'
     chartType: 'FilePath'
