@@ -10,12 +10,12 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: DownloadGitHubRelease@0
+- task: CmdLine@2
   inputs:
-    connection: 'seafoodguytoken'
-    userRepository: 'seafoodguy/spring-petclinic-asr-helmchart'
-    defaultVersionType: 'main'
-    downloadPath: '$(System.ArtifactsDirectory)'
+    script: 'git clone https://github.com/seafoodguy/spring-petclinic-asr-helmchart.git'
+    workingDirectory: '$(System.ArtifactsDirectory)'
+
+
 
 - task: HelmDeploy@0
   inputs:
