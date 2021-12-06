@@ -16,7 +16,9 @@ steps:
     userRepository: 'seafoodguy/spring-petclinic-asr-helmchart'
     defaultVersionType: 'specificTag'
     version: 'main'
-    downloadPath: '- task: HelmDeploy@0
+    downloadPath: '$(System.ArtifactsDirectory)'
+
+- task: HelmDeploy@0
   inputs:
     connectionType: 'Azure Resource Manager'
     azureSubscription: 'iconinfo o365'
@@ -26,7 +28,5 @@ steps:
     command: 'install'
     chartType: 'FilePath'
     chartPath: '$(System.ArtifactsDirectory)'
-    chartVersion: '29''
-
-
-
+    chartVersion: '29'
+    
