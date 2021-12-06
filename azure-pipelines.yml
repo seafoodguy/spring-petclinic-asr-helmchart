@@ -14,7 +14,7 @@ steps:
   inputs:
     connection: 'seafoodguytoken'
     userRepository: 'seafoodguy/spring-petclinic-asr-helmchart'
-    defaultVersionType: 'specificTag'
+    defaultVersionType: 'specificVersion'
     version: '29'
     downloadPath: '$(System.ArtifactsDirectory)'
 
