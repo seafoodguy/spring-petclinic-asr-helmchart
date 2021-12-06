@@ -26,6 +26,6 @@ steps:
     namespace: 'testns'
     command: 'install'
     chartType: 'FilePath'
-    chartPath: '$(System.ArtifactsDirectory)'
+    chartPath: '$(System.ArtifactsDirectory)/spring-petclinic-asr-helmchart'
     chartVersion: '29'
     
