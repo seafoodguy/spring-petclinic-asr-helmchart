@@ -10,6 +10,14 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: DownloadGitHubRelease@0
+  inputs:
+    connection: 'seafoodguytoken'
+    userRepository: 'seafoodguy/spring-petclinic-asr-helmchart'
+    defaultVersionType: 'specificTag'
+    version: 'main'
+    downloadPath: '$(System.ArtifactsDirectory)'
+    
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
