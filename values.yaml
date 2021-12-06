@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: harbor.alfredshek.site:443/library/samples/spring-petclinic
+  repository: iconalfred.azurecr.io/seafoodguyspringpetclinicasr
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: v1.0.6
+  tag: 29
 
 imagePullSecrets: []
 nameOverride: "spring-petclinic"
@@ -37,10 +37,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: NodePort
+  type: LoadBalancer
   port: 8080
-  targetPort: 8080
-  nodePort: 30800
 
 ingress:
   enabled: false
