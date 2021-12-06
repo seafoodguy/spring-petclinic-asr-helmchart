@@ -27,5 +27,5 @@ steps:
     command: 'install'
     chartType: 'FilePath'
     chartPath: '$(System.ArtifactsDirectory)/spring-petclinic-asr-helmchart'
-    chartVersion: '29'
+    releaseName: 'spring-petclinic'
     
