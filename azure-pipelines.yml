@@ -39,5 +39,5 @@ steps:
         chartType: 'FilePath'
         chartPath: '/home/vsts/work/1/s/spring-petclinic-asr-helmchart/spring-petclinic-1.0.0.tgz'
         releaseName: 'spring-petclinic'
-        arguments: '--set image=iconalfred.azurecr.io/seafoodguyspringpetclinicasr:30'
+        arguments: '--set image.tag=30'
         
