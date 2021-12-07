@@ -10,16 +10,32 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: CmdLine@2
-  inputs:
-    script: 'git clone https://github.com/seafoodguy/spring-petclinic-asr-helmchart.git'
-    workingDirectory: '$(System.ArtifactsDirectory)'
-
-
-- task: CmdLine@2
-  inputs:
-    script: |
-      cd spring-petclinic-asr-helmchart
-      sed -i -r 's,repository: (.+),repository: iconalfred.azurecr.io/seafoodguyspringpetclinicasr,' values.yaml
-      sed 's/tag:.*/tag: 30/g' values.yaml
-      cat values.yaml
+    - task: HelmInstaller@0
+      inputs:
+        helmVersion: '3.6.0'
+        checkLatestHelmVersion: false
+        installKubectl: true
+    - task: CmdLine@2
+      inputs:
+        script: |
+          git config --global user.name azuredevops
+          git config --global user.email alfredshek@icon-info.com.hk
+          git clone https://github.com/seafoodguy/spring-petclinic-asr-helmchart.git
+          cd spring-petclinic-asr-helmchart
+          sed -i -r 's,repository: (.+),repository: iconalfred.azurecr.io/seafoodguyspringpetclinicasr,' values.yaml
+          sed 's/tag:.*/tag: 30/g' values.yaml
+          cat values.yaml
+          export HELM_EXPERIMENTAL_OCI=1
+          helm package .
+    - task: HelmDeploy@0
+      inputs:
+        connectionType: 'Azure Resource Manager'
+        azureSubscription: 'iconinfo o365'
+        azureResourceGroup: 'AL-AKS'
+        kubernetesCluster: 'alfredk8s'
+        useClusterAdmin: true
+        namespace: 'testns'
+        command: 'install'
+        chartType: 'FilePath'
+        chartPath: '/home/vsts/work/1/s/spring-petclinic-asr-helmchart'
+        releaseName: 'spring-petclinic'
