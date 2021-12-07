@@ -16,17 +16,10 @@ steps:
     workingDirectory: '$(System.ArtifactsDirectory)'
 
 
-
-- task: HelmDeploy@0
+- task: CmdLine@2
   inputs:
-    connectionType: 'Azure Resource Manager'
-    azureSubscription: 'iconinfo o365'
-    azureResourceGroup: 'AL-AKS'
-    kubernetesCluster: 'alfredk8s'
-    useClusterAdmin: true
-    namespace: 'testns'
-    command: 'install'
-    chartType: 'FilePath'
-    chartPath: '$(System.ArtifactsDirectory)/spring-petclinic-asr-helmchart'
-    releaseName: 'spring-petclinic'
-    
+    script: |
+      cd spring-petclinic-asr-helmchart
+      sed -i -r 's,repository: (.+),repository: iconalfred.azurecr.io/seafoodguyspringpetclinicasr,' values.yaml
+      sed -i 's/tag: */tag: 30/' values.yaml
+      cat values.yaml
