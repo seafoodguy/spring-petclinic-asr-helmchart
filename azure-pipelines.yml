@@ -39,3 +39,5 @@ steps:
         chartType: 'FilePath'
         chartPath: '/home/vsts/work/1/s/spring-petclinic-asr-helmchart/spring-petclinic-1.0.0.tgz'
         releaseName: 'spring-petclinic'
+        valueFile: '/home/vsts/work/1/s/spring-petclinic-asr-helmchart/values.yaml'
+        
